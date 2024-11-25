@@ -6,6 +6,21 @@ $result = mysqli_query($connection, $sql);
 
 
 
+if (isset($_GET["id"])) {
+    $id = $_GET["id"];
+
+
+    $sql = "DELETE FROM blogs WHERE Id = $id";
+    $delete_result = mysqli_query($connection, $sql);
+
+    if ($result) {
+        header("Location: index.php");
+    } else {
+        echo "Error Delete Server";
+    }
+}
+
+
 
 $connection->close();
 
@@ -115,7 +130,7 @@ $connection->close();
 
 
                                 <a href="update_post.php?id=" class="btn btn-warning">Update</a>
-                                <a href="delete_post.php?id=" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this post?')">Delete</a>
+                                <a href="index.php?id=<?php echo htmlspecialchars($post["Id"]); ?>" class="btn btn-danger">Delete</a>
                             </div>
                         </div>
                     </div>
